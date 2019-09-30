@@ -3,12 +3,14 @@ const { Router } = require('express');
 const router = new Router();
 
 router.post('/echo', function(req, res) {
-	const speech =
-		req.body.queryResult &&
-		req.body.queryResult.parameters &&
-		req.body.queryResult.parameters.echoText
-			? req.body.queryResult.parameters.echoText
-			: 'Seems like some problem. Speak again.';
+	// const speech =
+	// 	req.body.queryResult &&
+	// 	req.body.queryResult.parameters &&
+	// 	req.body.queryResult.parameters.echoText
+	// 		? req.body.queryResult.parameters.echoText
+	// 		: 'Seems like some problem. Speak again.';
+
+	const speech = 'hallo maxim';
 
 	console.log('test', req.body);
 	const speechResponse = {

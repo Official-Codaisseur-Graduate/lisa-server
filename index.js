@@ -1,22 +1,23 @@
-const express = require("express")
-const cors = require('cors')
-const bodyParser = require("body-parser")
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
-const dishRouter = require("./dish-table/routes");
-const typeRouter = require('./type-table/routes')
-const menuRouter = require("./menu-table/routes")
-const hooksRouter = require('./hooks')
+const dishRouter = require('./dish-table/routes');
+const typeRouter = require('./type-table/routes');
+const menuRouter = require('./menu-table/routes');
+const hooksRouter = require('./hooks');
+const dialogFlow = require('./dialogFlow/router');
 
-const app = express()
-const port = process.env.PORT || 5000
-
+const app = express();
+const port = process.env.PORT || 5000;
 
 app
-  .use(cors())
-  .use(bodyParser.json())
-  .use(dishRouter)
-  .use(typeRouter)
-  .use(menuRouter)
-  .use(hooksRouter)
+	.use(cors())
+	.use(bodyParser.json())
+	.use(dishRouter)
+	.use(typeRouter)
+	.use(menuRouter)
+	.use(hooksRouter)
+	.use(dialogFlow);
 
-app.listen(port, console.log(`listen to port ${port}`))
+app.listen(port, console.log(`listen to port ${port}`));

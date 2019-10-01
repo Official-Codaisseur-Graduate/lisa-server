@@ -18,7 +18,8 @@ router.post("/menus", (req, res) => {
     }
   })
     .then(menu => {
-      console.log("menu", menu[0].dataValues.dish_name)
+      const menuItemName = menu[0].dataValues.dish_name 
+
       const speechResponse = {
         google: {
           expectUserResponse: true,
@@ -26,7 +27,7 @@ router.post("/menus", (req, res) => {
             items: [
               {
                 simpleResponse: {
-                  textToSpeech: menu
+                  textToSpeech: menuItemName
                 }
               }
             ]
@@ -38,9 +39,9 @@ router.post("/menus", (req, res) => {
 
       return res.json({
         payload: speechResponse,
-        fulfillmentText: menu,
-        speech: menu,
-        displayText: menu,
+        fulfillmentText: menuItemName,
+        speech: menuItemName,
+        displayText: menuItemName,
         source: "webhook-echo-sample"
       });
     })

@@ -2,54 +2,6 @@ const { Router } = require("express");
 const Menu = require("./model");
 const router = new Router();
 
-//get menus by date for Google
-
-router.post("/google-menus", (req, res) => {
-  const date =
-    req.body.queryResult &&
-    req.body.queryResult.parameters &&
-    req.body.queryResult.parameters.date
-      ? req.body.queryResult.parameters.date.startDateTime
-      : "Seems like some problem. Speak again.";
-
-  Menu.findAll({
-    where: {
-      date: new Date(date)
-    }
-  })
-    .then(menu => {
-      const menuItemName = menu[0].dataValues.dish_name;
-
-      const speechResponse = {
-        google: {
-          expectUserResponse: true,
-          richResponse: {
-            items: [
-              {
-                simpleResponse: {
-                  textToSpeech: menuItemName
-                }
-              }
-            ]
-          }
-        }
-      };
-
-      console.log("speech", speechResponse);
-
-      return res.json({
-        payload: speechResponse,
-        fulfillmentText: menuItemName,
-        speech: menuItemName,
-        displayText: menuItemName,
-        source: "webhook-echo-sample"
-      });
-    })
-    .catch(error => {
-      menuResponse = error;
-    });
-});
-
 //get menus by date
 
 router.get("/menus", (req, res) => {

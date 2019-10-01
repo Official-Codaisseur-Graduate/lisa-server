@@ -18,7 +18,7 @@ router.post("/menus", (req, res) => {
     }
   })
     .then(menu => {
-      console.log("menu", menu.dishName, menu)
+      console.log("menu", menu[0])
       const speechResponse = {
         google: {
           expectUserResponse: true,

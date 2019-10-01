@@ -8,7 +8,7 @@ router.get("/menus", (req, res) => {
   Menu
     .findAll({
       where: {
-        date: date
+        date: new Date(date)
       }
     })
     .then(menu => {

@@ -2,9 +2,9 @@ const { Router } = require("express");
 const Menu = require("./model");
 const router = new Router();
 
-//get menus by date
+//get menus by date for Google
 
-router.post("/menus", (req, res) => {
+router.post("/google-menus", (req, res) => {
   const date =
     req.body.queryResult &&
     req.body.queryResult.parameters &&
@@ -18,7 +18,7 @@ router.post("/menus", (req, res) => {
     }
   })
     .then(menu => {
-      const menuItemName = menu[0].dataValues.dish_name 
+      const menuItemName = menu[0].dataValues.dish_name;
 
       const speechResponse = {
         google: {
@@ -35,7 +35,7 @@ router.post("/menus", (req, res) => {
         }
       };
 
-      console.log("speech", speechResponse)
+      console.log("speech", speechResponse);
 
       return res.json({
         payload: speechResponse,
@@ -50,28 +50,18 @@ router.post("/menus", (req, res) => {
     });
 });
 
-// router.post("/menus", (req, res) => {
-//   if (
-//     req.body.queryResult &&
-//     req.body.queryResult.parameters &&
-//     req.body.queryResult.parameters.date
-//   ) {
-//     const date = req.body.queryResult.parameters.date;
+//get menus by date
 
-//     Menu.findAll({
-//       where: {
-//         date: new Date(date)
-//       }
-//     }).then(menu => {
-//       res.json(menu);
-//     });
-//   } else {
-//     return res.status(400).send({
-//       message: "Please provide a date parameter",
-//       succes: false
-//     });
-//   }
-// });
+router.get("/menus", (req, res) => {
+  const { date } = req.query;
+  Menu.findAll({
+    where: {
+      date: date
+    }
+  }).then(menu => {
+    res.json(menu);
+  });
+});
 
 //create new menu
 router.post("/menus", (req, res) => {

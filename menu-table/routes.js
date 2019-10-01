@@ -3,28 +3,71 @@ const Menu = require("./model");
 const router = new Router();
 
 //get menus by date
-router.get("/menus", (req, res) => {
-  if (
+
+router.post("/menus", (req, res) => {
+  const date =
     req.body.queryResult &&
     req.body.queryResult.parameters &&
-    req.body.queryResult.parameters.data
-  ) {
-    const date = req.body.queryResult.parameters.data;
+    req.body.queryResult.parameters.date
+      ? req.body.queryResult.parameters.date
+      : "Seems like some problem. Speak again.";
 
-    Menu.findAll({
-      where: {
-        date: new Date(date)
-      }
-    }).then(menu => {
-      res.json(menu);
+  Menu.findAll({
+    where: {
+      date: new Date(date)
+    }
+  })
+    .then(menu => {
+      const speechResponse = {
+        google: {
+          expectUserResponse: true,
+          richResponse: {
+            items: [
+              {
+                simpleResponse: {
+                  textToSpeech: menu.dishName
+                }
+              }
+            ]
+          }
+        }
+      };
+
+      return res.json({
+        payload: speechResponse,
+        fulfillmentText: menu.dishName,
+        speech: menu.dishName,
+        displayText: menu.dishName,
+        source: "webhook-echo-sample"
+      });
+    })
+    .catch(error => {
+      menuResponse = error;
     });
-  } else {
-    return res.status(400).send({
-      message: "Please provide a date parameter",
-      succes: false
-    });
-  }
 });
+
+// router.post("/menus", (req, res) => {
+//   if (
+//     req.body.queryResult &&
+//     req.body.queryResult.parameters &&
+//     req.body.queryResult.parameters.date
+//   ) {
+//     const date = req.body.queryResult.parameters.date;
+
+//     Menu.findAll({
+//       where: {
+//         date: new Date(date)
+//       }
+//     }).then(menu => {
+//       res.json(menu);
+//     });
+//   } else {
+//     return res.status(400).send({
+//       message: "Please provide a date parameter",
+//       succes: false
+//     });
+//   }
+// });
 
 //create new menu
 router.post("/menus", (req, res) => {

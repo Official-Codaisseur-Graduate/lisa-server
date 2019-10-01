@@ -27,12 +27,12 @@ router.post("/google-menus", (req, res) => {
 
       const speechResponse = {
         google: {
-          expectUserResponse: true,
+          expectUserResponse: false,
           richResponse: {
             items: [
               {
                 simpleResponse: {
-                  textToSpeech: menuItemName
+                  textToSpeech: `Het menu voor vanavond is ${menuItemName}`
                 }
               }
             ]

@@ -18,6 +18,7 @@ router.post("/menus", (req, res) => {
     }
   })
     .then(menu => {
+      console.log("menu", menu.dishName, menu)
       const speechResponse = {
         google: {
           expectUserResponse: true,
@@ -32,6 +33,8 @@ router.post("/menus", (req, res) => {
           }
         }
       };
+
+      console.log("speech", speechResponse)
 
       return res.json({
         payload: speechResponse,

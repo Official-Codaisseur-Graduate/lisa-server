@@ -9,7 +9,7 @@ router.post("/menus", (req, res) => {
     req.body.queryResult &&
     req.body.queryResult.parameters &&
     req.body.queryResult.parameters.date
-      ? req.body.queryResult.parameters.date
+      ? req.body.queryResult.parameters.date.startDateTime
       : "Seems like some problem. Speak again.";
 
   Menu.findAll({

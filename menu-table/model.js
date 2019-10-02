@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-const sequelize = require('../db')
+const { sequelize } = require('../db')
 
 const Menu = sequelize.define('menus', {
   dish_name: {
@@ -12,12 +12,12 @@ const Menu = sequelize.define('menus', {
   },
   date: {
     type: Sequelize.DATEONLY,
-    allowNull: true
+    allowNull: false
   },
 
 }, {
-    timestamps: false,
-    tableName: 'menus'
-  })
+  timestamps: false,
+  tableName: 'menus'
+})
 
 module.exports = Menu

@@ -12,7 +12,7 @@ const Menu = sequelize.define('menus', {
   },
   date: {
     type: Sequelize.DATEONLY,
-    allowNull: true
+    allowNull: false
   },
 
 }, {

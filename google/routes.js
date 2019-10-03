@@ -5,6 +5,7 @@ const noTypeSentence = require('./googleFunctions/noType');
 const typeSentence = require('./googleFunctions/voorOfNagerecht');
 const hoofdgerechtSentence = require('./googleFunctions/hoofdgerechtSentence')
 const sendError = require('./googleResponses/error')
+const sendMenu = require('./googleResponses/menu')
 
 const router = new Router();
 
@@ -25,51 +26,31 @@ router.post('/google-menus', async (req, res) => {
     const menuExists = await Menu.findOne({
       where: { date }
     })
+
     if (!menuExists) {
       const noMenu = `Het menu voor die dag is onbekend. Probeer een andere dag.`
       return res.send(sendError(noMenu))
     }
 
-    let finalMenu;
+    let menu;
     if (body.type.length === 0 || !body.type) {
-      finalMenu = await noTypeSentence(date);
+      menu = await noTypeSentence(date);
     } else if (
       body.type === 'Voorgerecht' ||
       body.type === 'Nagerecht'
     ) {
-      finalMenu = await typeSentence(date, body.type);
+      menu = await typeSentence(date, body.type);
     } else if (
       body.type === 'Hoofdgerecht'
     ) {
-      finalMenu = await hoofdgerechtSentence(date)
+      menu = await hoofdgerechtSentence(date)
     }
 
-    const textToSpeech = `<speak><prosody rate="slow">${finalMenu}</prosody></speak>`
+    return res.send(sendMenu(menu))
 
-    const speechResponse = {
-      google: {
-        expectUserResponse: false,
-        richResponse: {
-          items: [
-            {
-              simpleResponse: {
-                textToSpeech
-              }
-            }
-          ]
-        }
-      }
-    };
-
-    return res.json({
-      payload: speechResponse,
-      fulfillmentText: finalMenu,
-      speech: finalMenu,
-      displayText: finalMenu,
-      source: 'webhook-echo-sample'
-    });
   } catch (error) {
-    return res.send('Er ging iets mis');
+    const unknownError = "Er is iets misgegaan. Probeer het opnieuw."
+    return res.send(sendError(unknownError));
   }
 });
 

@@ -1,4 +1,4 @@
-const sendError = (error) => {
+const sendError = (error = "Er is iets misgegaan. Probeer het opnieuw.") => {
   return {
     payload: {
       google: {

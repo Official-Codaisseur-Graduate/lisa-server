@@ -9,7 +9,7 @@ const sequelize = new Sequelize(ConnectionString, {
 const dbSync = () => {
 	return sequelize
 		.sync
-		// { force: true }    // Force switch, syncs database to model
+		// { force: true } // Force switch, syncs database to model
 		// {alter: true}      // Alter switch, syncs database without deleting rows
 		()
 		.catch((err) => console.log(err));

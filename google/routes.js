@@ -49,8 +49,7 @@ router.post('/google-menus', async (req, res) => {
     return res.send(sendMenu(menu))
 
   } catch (error) {
-    const unknownError = "Er is iets misgegaan. Probeer het opnieuw."
-    return res.send(sendError(unknownError));
+    return res.send(sendError());
   }
 });
 

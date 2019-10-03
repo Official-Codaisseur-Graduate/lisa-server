@@ -1,6 +1,8 @@
-const Menu = require('../../menu-table/model');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
+
+const Menu = require('../../menu-table/model');
+const sendError = require('../googleResponses/error')
 
 async function typeSentence(date, type) {
   console.log('type', type);
@@ -40,8 +42,7 @@ async function typeSentence(date, type) {
     console.log('in noType', sentence);
     return sentence;
   } catch (error) {
-    res.send();
-    return 'Er ging iets mis';
+    return res.send(sendError())
   }
 }
 

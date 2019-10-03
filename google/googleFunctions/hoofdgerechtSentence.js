@@ -1,4 +1,5 @@
 const Menu = require('../../menu-table/model')
+const sendError = require('../googleResponses/error')
 
 async function hoofdgerechtSentence(date) {
   try {
@@ -57,8 +58,7 @@ async function hoofdgerechtSentence(date) {
     //console.log('innoType', sentence);
     return sentence;
   } catch (error) {
-    res.send();
-    return 'Er ging iets mis';
+    return res.send(sendError());
   }
 }
 

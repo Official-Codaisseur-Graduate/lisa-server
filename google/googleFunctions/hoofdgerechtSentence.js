@@ -53,7 +53,7 @@ async function hoofdgerechtSentence(date) {
       }
     );
     const { hoofdgerecht1, hoofdgerecht2, saus1, saus2, bijgerechten1, bijgerechten2 } = hoofdgerecht
-    const sentence = `De eerste keuze voor het hoofdgerecht is ${hoofdgerecht1} met ${saus1} ${bijgerechten1}. De tweede keuze is ${hoofdgerecht2} met ${saus2} ${bijgerechten2}.`;
+    const sentence = `De eerste optie voor het hoofdgerecht is ${hoofdgerecht1} met ${saus1} ${bijgerechten1}. De tweede optie is ${hoofdgerecht2} met ${saus2} ${bijgerechten2}.`;
     //console.log('innoType', sentence);
     return sentence;
   } catch (error) {

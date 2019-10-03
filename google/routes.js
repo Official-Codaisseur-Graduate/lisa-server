@@ -8,12 +8,14 @@ const hoofdgerechtSentence = require('./googleFunctions/hoofdgerechtSentence')
 const router = new Router();
 
 //get menus by date for Google
-
 router.post('/google-menus', async (req, res) => {
+
   const body = req.body.queryResult.parameters;
+
   if (!body.type && !body.date) {
     return res.send('Er ging iets mis');
   }
+
   let date;
   if (body.date.startDateTime) {
     date = new Date(body.date.startDateTime);
@@ -22,8 +24,8 @@ router.post('/google-menus', async (req, res) => {
   } else {
     date = new Date();
   }
-  let finalMenu;
 
+  let finalMenu;
   if (body.type.length === 0 || !body.type) {
     finalMenu = await noTypeSentence(date);
   } else if (
@@ -37,6 +39,8 @@ router.post('/google-menus', async (req, res) => {
     finalMenu = await hoofdgerechtSentence(date)
   }
 
+  const textToSpeech = `<speak><prosody rate='slow'>${finalMenu}</prosody></speak>`
+
   const speechResponse = {
     google: {
       expectUserResponse: false,
@@ -44,15 +48,13 @@ router.post('/google-menus', async (req, res) => {
         items: [
           {
             simpleResponse: {
-              textToSpeech: finalMenu
+              textToSpeech
             }
           }
         ]
       }
     }
   };
-
-  console.log('speech', speechResponse);
 
   return res.json({
     payload: speechResponse,

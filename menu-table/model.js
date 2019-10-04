@@ -1,23 +1,30 @@
-const Sequelize = require('sequelize')
-const { sequelize } = require('../db')
+const Sequelize = require('sequelize');
+const { sequelize } = require('../db');
 
-const Menu = sequelize.define('menus', {
-  dish_name: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  type_name: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  date: {
-    type: Sequelize.DATEONLY,
-    allowNull: false
-  },
+const Menu = sequelize.define(
+	'menus',
+	{
+		dish_name: {
+			type: Sequelize.STRING,
+			allowNull: false
+		},
+		type_name: {
+			type: Sequelize.STRING,
+			allowNull: false
+		},
+		date: {
+			type: Sequelize.DATEONLY,
+			allowNull: false
+		},
+		week: {
+			type: Sequelize.INTEGER
+			// allowNull: false
+		}
+	},
+	{
+		timestamps: false,
+		tableName: 'menus'
+	}
+);
 
-}, {
-  timestamps: false,
-  tableName: 'menus'
-})
-
-module.exports = Menu
+module.exports = Menu;

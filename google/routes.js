@@ -7,10 +7,12 @@ const hoofdgerechtSentence = require('./googleFunctions/hoofdgerechtSentence')
 const sendError = require('./googleResponses/error')
 const sendMenu = require('./googleResponses/menu')
 
+
 const router = new Router();
 
 //get menus by date for Google
 router.post('/google-menus', async (req, res) => {
+
   try {
     const body = req.body.queryResult.parameters;
 

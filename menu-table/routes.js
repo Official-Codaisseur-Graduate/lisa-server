@@ -6,6 +6,7 @@ const currentWeekNumber = require('current-week-number');
 //get menus by date
 router.get('/menus', (req, res) => {
 	const { date } = req.query;
+	console.log('getting menu');
 	Menu.findAll({
 		where: {
 			date: date
@@ -17,8 +18,12 @@ router.get('/menus', (req, res) => {
 
 //create new menu
 router.post('/menus', (req, res) => {
+	console.log('creating', req.body);
 	const { dish } = req.body;
-	Menu.create(dish).then((menu) => res.status(201).json(menu));
+	const week = currentWeekNumber(dish.date);
+	Menu.create({ ...dish, week: week })
+		.then((menu) => res.status(201).send(menu))
+		.catch(console.error);
 });
 
 //delete menu by id
@@ -42,19 +47,21 @@ router.delete('/menus/:id', (req, res, next) => {
 });
 
 //get menu by week
-router.get('/menu/week/:weekId', async (req, res, next) => {
-	const { weekId } = req.params;
+router.get('/menu/week/:date', async (req, res, next) => {
+	const { date } = req.params;
+
 	try {
+		console.log('date', date);
+		const currentWeek = currentWeekNumber(date);
+		console.log('currentWeek', currentWeek);
+
 		const weekMenu = await Menu.findAll({
 			where: {
-				week: weekId
+				week: currentWeek
 			}
 		});
-		console.log(
-			weekMenu.map((item) =>
-				currentWeekNumber(item.dataValues.date)
-			)
-		);
+		console.log(weekMenu);
+		res.send(weekMenu);
 	} catch (err) {
 		console.error(err);
 	}

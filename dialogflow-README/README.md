@@ -1,3 +1,5 @@
+## PLEASE READ [INITIAL SETUP](https://github.com/Official-Codaisseur-Graduate/lisa-client/blob/master/InitialSetup.md) FIRST
+
 ## What is Dialogflow?
 Dialogflow (formerly Api.ai) is a Google-owned developer of human–computer interaction technologies based on natural language conversations. You can develope a virtual buddy for Android, iOS, and Windows Phone smartphones that performs tasks and answers users’ question in a natural language. It also created a natural language processing engine that incorporates conversation context like dialogue history, location and user preferences.
 

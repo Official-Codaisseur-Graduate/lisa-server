@@ -1,3 +1,6 @@
+## PLEASE READ [INITIAL SETUP](https://github.com/Official-Codaisseur-Graduate/lisa-client/blob/master/InitialSetup.md) FIRST
+
+
 ## Introduction
 This is an API for Vitalis Menu editor. Check out the deployed version of the full app here:
 

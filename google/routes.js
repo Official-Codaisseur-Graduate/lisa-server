@@ -1,60 +1,58 @@
-const { Router } = require('express')
+const { Router } = require('express');
 
-const Menu = require('../menu-table/model')
+const Menu = require('../menu-table/model');
+const noTypeSentence = require('./googleFunctions/noType');
+const typeSentence = require('./googleFunctions/voorOfNagerecht');
+const hoofdgerechtSentence = require('./googleFunctions/hoofdgerechtSentence')
+const sendError = require('./googleResponses/error')
+const sendMenu = require('./googleResponses/menu')
+
 
 const router = new Router();
 
 //get menus by date for Google
+router.post('/google-menus', async (req, res) => {
 
-router.post("/google-menus", (req, res) => {
-  let date
+  try {
+    const body = req.body.queryResult.parameters;
 
-  if (req.body.queryResult.parameters.date.startDateTime) {
-    date = new Date(req.body.queryResult.parameters.date.startDateTime)
-  } else if (req.body.queryResult.parameters.date) {
-    date = new Date(req.body.queryResult.parameters.date)
-  } else {
-    date = new Date()
-  }
-
-  Menu.findAll({
-    where: {
-      date
+    let date;
+    if (body.date && body.date.startDateTime) {
+      date = new Date(body.date.startDateTime);
+    } else if (body.date) {
+      date = new Date(body.date);
+    } else {
+      date = new Date();
     }
-  })
-    .then(menu => {
-      const menuItemName = menu[0].dataValues.dish_name;
 
-      const speechResponse = {
-        google: {
-          expectUserResponse: false,
-          richResponse: {
-            items: [
-              {
-                simpleResponse: {
-                  textToSpeech: `Het menu voor vanavond is ${menuItemName}`
-                }
-              }
-            ]
-          }
-        }
-      };
-
-      console.log("speech", speechResponse);
-
-      return res.json({
-        payload: speechResponse,
-        fulfillmentText: menuItemName,
-        speech: menuItemName,
-        displayText: menuItemName,
-        source: "webhook-echo-sample"
-      });
+    const menuExists = await Menu.findOne({
+      where: { date }
     })
-    .catch(error => {
-      res.status(400).send({
-        error: "Er ging iets mis"
-      })
-    });
-})
 
-module.exports = router
+    if (!menuExists) {
+      const noMenu = `Het menu voor die dag is onbekend. Probeer een andere dag.`
+      return res.send(sendError(noMenu))
+    }
+
+    let menu;
+    if (body.type.length === 0 || !body.type) {
+      menu = await noTypeSentence(date);
+    } else if (
+      body.type === 'Voorgerecht' ||
+      body.type === 'Nagerecht'
+    ) {
+      menu = await typeSentence(date, body.type);
+    } else if (
+      body.type === 'Hoofdgerecht'
+    ) {
+      menu = await hoofdgerechtSentence(date)
+    }
+
+    return res.send(sendMenu(menu))
+
+  } catch (error) {
+    return res.send(sendError());
+  }
+});
+
+module.exports = router;

@@ -18,7 +18,6 @@ router.get('/menus', (req, res) => {
 
 //create new menu
 router.post('/menus', (req, res) => {
-	console.log('creating', req.body);
 	const { dish } = req.body;
 	const week = currentWeekNumber(dish.date);
 	Menu.create({ ...dish, week: week })
@@ -29,7 +28,6 @@ router.post('/menus', (req, res) => {
 //delete menu by id
 router.delete('/menus/:id', (req, res, next) => {
 	const { id } = req.params;
-	console.log('REQ PARAMS', req.params);
 	Menu.findByPk(id)
 		.then((menuItem) => {
 			if (!menuItem) {
@@ -51,16 +49,13 @@ router.get('/menu/week/:date', async (req, res, next) => {
 	const { date } = req.params;
 
 	try {
-		console.log('date', date);
 		const currentWeek = currentWeekNumber(date);
-		console.log('currentWeek', currentWeek);
 
 		const weekMenu = await Menu.findAll({
 			where: {
 				week: currentWeek
 			}
 		});
-		console.log(weekMenu);
 		res.send(weekMenu);
 	} catch (err) {
 		console.error(err);

@@ -3,7 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const { sequelize } = require('./db')
 const { dbSync } = require('./db')
-const createSampleData = require('./sampleData')
+const createDishTypes = require('./dishTypeData')
 
 const dishRouter = require('./dish-table/routes');
 const typeRouter = require('./type-table/routes');
@@ -16,7 +16,7 @@ const port = process.env.PORT || 5000;
 dbSync()
   .then(() => {
     console.log("Connected to database")
-    createSampleData()
+    createDishTypes()
   })
 
 app

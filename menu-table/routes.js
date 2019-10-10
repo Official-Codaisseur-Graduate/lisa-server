@@ -11,9 +11,11 @@ router.get('/menus', (req, res) => {
 		where: {
 			date: date
 		}
-	}).then((menu) => {
-		res.json(menu);
-	});
+	})
+		.then((menu) => {
+			res.send(menu);
+		})
+		.catch(console.error);
 });
 
 //create new menu

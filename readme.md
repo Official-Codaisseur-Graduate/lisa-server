@@ -1,5 +1,7 @@
+## PLEASE READ [INITIAL SETUP](https://github.com/Official-Codaisseur-Graduate/lisa-client/blob/master/InitialSetup.md) FIRST
+
 ## Introduction
-This is an API for Vitalis Menu editor. This server is also a connection to the google API and DialogFLow.
+This is an API for Vitalis Menu editor. This server is also a connection to the google API and DialogFLow. The client can be found [here](https://github.com/Official-Codaisseur-Graduate/lisa-client).
 
 ## Overview
 With this API, a user can:

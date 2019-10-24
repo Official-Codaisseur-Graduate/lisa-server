@@ -7,12 +7,21 @@ const Dish=require('../dish-table/model')
 const Location = sequelize.define(
 	'locations',
 	{
-		location_name: {
+		name: {
 			type: Sequelize.STRING,
 			allowNull: false
 		},
-		location_description: {
-			type: Sequelize.STRING
+		address: {
+			type: Sequelize.STRING,
+			allowNull: false
+		},
+		latitude: {
+			type: Sequelize.FLOAT,
+			allowNull: false
+		},
+		longitude: {
+			type: Sequelize.FLOAT,
+			allowNull: false
 		}
 	},
 	{

@@ -35,8 +35,8 @@ router.delete('/types/:id', (req, res, next) => {
     .catch(error => next(error))
 })
 
-// create new type
-router.post('/types', function (req, res, next) {
+// create new type-i will work on this now
+router.post('/location/:locationId/types', function (req, res, next) {
   console.log('REQ', req.body)
   const type = {
     name: req.body.type.name,
@@ -54,19 +54,9 @@ router.post('/types', function (req, res, next) {
 })
 
 //get all types
-router.get("/location/:locationId/types", function (req, res, next) {
-    //http://localhost:5000/location/1/types
-    //findalll where locaId in the table is the same as locat id f
-    //{
-    //         where: {
-    //             id: req.params.ticketId,
-    //         }
-    //     }
-  Dishtype.findAll({
-             where: {
-                  locationId: req.params.locationId,
-               }
-          })
+router.get("/types", function (req, res, next) {
+
+  Dishtype.findAll()
     .then(types => {
       res.json(types);
     })

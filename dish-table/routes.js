@@ -5,13 +5,14 @@ const Type = require("../type-table/model");
 const router = new Router()
 
 // adds a menu dish
-router.post('/dishes', function(req, res, next) {
-  console.log(req.body)
+router.post('/location/:locationId/dishes', function(req, res, next) {
   const { dishName, typeId } = req.body.dish
   const dish = {
     name: dishName,
-    typeId
+    typeId,
+    locationId: req.params.locationId
   }
+  //3
   Dish.create(dish)
     .then(dish => {
       if (!dish) {
@@ -65,9 +66,11 @@ router.delete('/dishes/:id', (req, res, next) => {
 })
 
 // get a menu dish by id
-router.get("/dishes/:id", function(req, res, next) {
+router.get("/location/:locationId/dishes/:id", function(req, res, next) {
   const id = req.params.id;
-  Dish.findByPk(id)
+  Dish.findByPk(id, {
+      where: {locationId: req.params.locationId}
+  })
     .then(dish => {
       if (!dish) {
         return res.status(404).send({
@@ -79,11 +82,15 @@ router.get("/dishes/:id", function(req, res, next) {
     .catch(err => next(err));
 });
 
+
+
 // get a menu dish by type
-router.get("/dishes", function(req, res, next) {
+router.get("/location/:locationId/dishes", function(req, res, next) {
   Dish.findAll({
     where: {
-      typeId: req.query.type
+        //added location
+      typeId: req.query.type,
+      locationId: req.params.locationId
     }
   })
     .then(dishes => {

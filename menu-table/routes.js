@@ -4,12 +4,12 @@ const router = new Router();
 const currentWeekNumber = require('current-week-number');
 
 //get menus by date
-router.get('/location-table/:locationName/menus', (req, res) => {
+router.get('/location/:locationId/menus', (req, res) => {
 	const { date } = req.query;
 	console.log('getting menu');
 	Menu.findAll({
 		where: {
-			locationId: req.params.locationName,
+			locationId: req.params.locationId,
 			date: date
 		}
 	})
@@ -19,11 +19,18 @@ router.get('/location-table/:locationName/menus', (req, res) => {
 		.catch(console.error);
 });
 
-//create new menu
-router.post('/menus', (req, res) => {
-	const { dish } = req.body;
+router.post('/location/:locationId/menus', (req, res) => {
+	console.log('Check what is in the create menu 2', req.body.dish)
+
+	const dish= {
+		type_name: req.body.dish.type_name,
+		dish_name: req.body.dish.dish_name,
+		date: req.body.dish.date,
+		locationId: req.params.locationId
+	}
+	console.log('dish', dish)
 	const week = currentWeekNumber(dish.date);
-	Menu.create({ ...dish, week: week })
+	Menu.create({ ...dish, week: week } )
 		.then((menu) => res.status(201).send(menu))
 		.catch(console.error);
 });
@@ -48,7 +55,7 @@ router.delete('/menus/:id', (req, res, next) => {
 });
 
 //get menu by week
-router.get('/menu/week/:date', async (req, res, next) => {
+router.get('/location/:locationId/menu/week/:date', async (req, res, next) => {
 	const { date } = req.params;
 
 	try {
@@ -56,7 +63,8 @@ router.get('/menu/week/:date', async (req, res, next) => {
 
 		const weekMenu = await Menu.findAll({
 			where: {
-				week: currentWeek
+				week: currentWeek,
+				locationId: req.params.locationId
 			}
 		});
 		res.send(weekMenu);

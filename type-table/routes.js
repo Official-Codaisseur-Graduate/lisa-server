@@ -35,7 +35,7 @@ router.delete('/types/:id', (req, res, next) => {
     .catch(error => next(error))
 })
 
-// create new type-i will work on this now
+// create new type
 router.post('/location/:locationId/types', function (req, res, next) {
   console.log('REQ', req.body)
   const type = {

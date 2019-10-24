@@ -31,10 +31,8 @@ const Location = sequelize.define(
 );
 
 Menu.belongsTo(Location)
-Dishtype.belongsTo(Location)
 Dish.belongsTo(Location)
 Location.hasOne(Menu)
-Location.hasOne(Dishtype)
 Location.hasOne(Dish)
 
 module.exports = Location;

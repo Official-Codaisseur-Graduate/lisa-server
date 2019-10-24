@@ -2,7 +2,7 @@ const { Router } = require('express');
 
 const { findNearest } = require('geolib');
 const Menu = require('../menu-table/model');
-const Location = require('../location/model')
+const Location = require('../location-table/model')
 const noTypeSentence = require('./googleFunctions/noType');
 const typeSentence = require('./googleFunctions/voorOfNagerecht');
 const hoofdgerechtSentence = require('./googleFunctions/hoofdgerechtSentence')
@@ -66,10 +66,7 @@ app.catch((conv, error) => {
 router.post('/google-menus', app)
 
 readMenu = async (conv) => {
-  /** ToDo:
-   * use location.id to fetch the correct menu
-   */
-  const location = await getLocation(conv)
+  const { id, name } = await getLocation(conv)
 
   const body = conv.user.storage.parameters;
 
@@ -83,26 +80,29 @@ readMenu = async (conv) => {
   }
 
   const menuExists = await Menu.findOne({
-    where: { date }
+    where: {
+      date,
+      locationId: id
+    }
   })
 
   if (!menuExists) {
-    const noMenu = `Het menu voor die dag bij ${location.name} is onbekend. Probeer een andere dag.`
+    const noMenu = `Het menu voor die dag bij ${name} is onbekend. Probeer een andere dag.`
     return conv.ask(`${noMenu}`)
   }
 
   let menu;
   if (body.type.length === 0 || !body.type) {
-    menu = await noTypeSentence(date);
+    menu = await noTypeSentence(id, date);
   } else if (
     body.type === 'Voorgerecht' ||
     body.type === 'Nagerecht'
   ) {
-    menu = await typeSentence(date, body.type);
+    menu = await typeSentence(id, date, body.type);
   } else if (
     body.type === 'Hoofdgerecht'
   ) {
-    menu = await hoofdgerechtSentence(date)
+    menu = await hoofdgerechtSentence(id, date)
   }
   return conv.ask(menu)
 }

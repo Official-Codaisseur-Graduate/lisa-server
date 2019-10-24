@@ -1,9 +1,10 @@
 const Menu = require('../../menu-table/model');
 
-async function noTypeSentence(date) {
+async function noTypeSentence(locationId, date) {
   const menu = await Menu.findAll({
     where: {
-      date: date
+      date,
+      locationId
     }
   });
   const menuSentence = menu.reduce(

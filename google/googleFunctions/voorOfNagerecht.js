@@ -3,12 +3,13 @@ const Op = Sequelize.Op;
 
 const Menu = require('../../menu-table/model');
 
-async function typeSentence(date, type) {
+async function typeSentence(locationId, date, type) {
   console.log('type', type);
   const menu = await Menu.findAll({
     where: {
       date,
-      type_name: { [Op.iLike]: `${type}%` }
+      type_name: { [Op.iLike]: `${type}%` },
+      locationId
     }
   });
   console.log('--menu--', menu);

@@ -1,9 +1,10 @@
 const Menu = require('../../menu-table/model');
 
-async function hoofdgerechtSentence(date) {
+async function hoofdgerechtSentence(locationId, date) {
   const menu = await Menu.findAll({
     where: {
-      date
+      date,
+      locationId
     }
   });
 

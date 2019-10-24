@@ -4,11 +4,12 @@ const router = new Router();
 const currentWeekNumber = require('current-week-number');
 
 //get menus by date
-router.get('/menus', (req, res) => {
+router.get('/location-table/:locationName/menus', (req, res) => {
 	const { date } = req.query;
 	console.log('getting menu');
 	Menu.findAll({
 		where: {
+			locationId: req.params.locationName,
 			date: date
 		}
 	})

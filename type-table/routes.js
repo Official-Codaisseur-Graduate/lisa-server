@@ -54,8 +54,19 @@ router.post('/types', function (req, res, next) {
 })
 
 //get all types
-router.get("/types", function (req, res, next) {
-  Dishtype.findAll()
+router.get("/location/:locationId/types", function (req, res, next) {
+    //http://localhost:5000/location/1/types
+    //findalll where locaId in the table is the same as locat id f
+    //{
+    //         where: {
+    //             id: req.params.ticketId,
+    //         }
+    //     }
+  Dishtype.findAll({
+             where: {
+                  locationId: req.params.locationId,
+               }
+          })
     .then(types => {
       res.json(types);
     })
@@ -64,6 +75,7 @@ router.get("/types", function (req, res, next) {
 
 //gets a type by id
 router.get("/types/:id", function (req, res, next) {
+
   const id = req.params.id;
   Dishtype.findByPk(id)
     .then(type => {

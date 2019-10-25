@@ -13,23 +13,23 @@ async function noTypeSentence(locationId, date) {
 
       if (type_name.split(' ')[0] === 'Voorgerecht') {
         if (acc.voorgerecht.length < 1) {
-          acc.voorgerecht = `Het voorgerecht is ${dish_name}`;
+          acc.voorgerecht = `Het voorgerecht is ${dish_name}.`;
         } else {
-          acc.voorgerecht += ` of ${dish_name}`;
+          acc.voorgerecht = acc.voorgerecht.substring(0, acc.voorgerecht.length -1)
+          acc.voorgerecht += ` <break time="150ms" />of ${dish_name}. `;
         }
-      } else if (
-        type_name.split(' ')[0] === 'Hoofdgerecht'
-      ) {
+      } else if (type_name.split(' ')[0] === 'Hoofdgerecht') {
         if (acc.hoofdgerecht.length < 1) {
-          acc.hoofdgerecht = `Het hoofdgerecht ${dish_name}`;
+          acc.hoofdgerecht = `Het hoofdgerecht ${dish_name}.`;
         } else {
-          acc.hoofdgerecht += ` of ${dish_name}`;
+          acc.hoofdgerecht = acc.hoofdgerecht.substring(0, acc.hoofdgerecht.length -1)
+          acc.hoofdgerecht += ` <break time="150ms" />of ${dish_name}. `;
         }
       } else if (type_name.split(' ')[0] === 'Nagerecht') {
         if (acc.nagerecht.length < 1) {
           acc.nagerecht = `Het nagerecht ${dish_name}`;
         } else {
-          acc.nagerecht += ` of ${dish_name}`;
+          acc.nagerecht += ` <break time="150ms" />of ${dish_name}`;
         }
       }
       return acc;
@@ -40,9 +40,11 @@ async function noTypeSentence(locationId, date) {
       nagerecht: ''
     }
   );
-  const sentence = `<speak><p><s>${menuSentence.voorgerecht}.</s> <s>${menuSentence.hoofdgerecht}.</s> ${menuSentence.nagerecht}.</p> </speak>`;
-  // console.log('in noType', sentence);
-  return sentence;
+  return '<speak>' +
+    `<s>${menuSentence.voorgerecht}</s>` + 
+    `<s>${menuSentence.hoofdgerecht}</s>` +
+    `<s>${menuSentence.nagerecht}</s>` +
+    '</speak>';
 }
 
 module.exports = noTypeSentence;

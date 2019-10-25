@@ -63,9 +63,9 @@ async function hoofdgerechtSentence(locationId, date) {
     bijgerechten1,
     bijgerechten2
   } = hoofdgerecht;
-
-  const sentence = `<p><s>De eerste optie voor het hoofdgerecht is ${hoofdgerecht1}${saus1}${bijgerechten1}.</s> <s>De tweede optie is ${hoofdgerecht2}${saus2}${bijgerechten2}.</s></p>`
-  return sentence;
+  return '<speak><s>De eerste optie voor het hoofdgerecht is ' +
+    `${hoofdgerecht1}${saus1}${bijgerechten1}.</s>` +
+    ` <s>De tweede optie is ${hoofdgerecht2}${saus2}${bijgerechten2}</s></speak>`
 }
 
 module.exports = hoofdgerechtSentence;

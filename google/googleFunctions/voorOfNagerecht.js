@@ -4,7 +4,6 @@ const Op = Sequelize.Op;
 const Menu = require('../../menu-table/model');
 
 async function typeSentence(locationId, date, type) {
-  console.log('type', type);
   const menu = await Menu.findAll({
     where: {
       date,
@@ -12,7 +11,7 @@ async function typeSentence(locationId, date, type) {
       locationId
     }
   });
-  console.log('--menu--', menu);
+
   const menuSentence = menu.reduce(
     (acc, val) => {
       const { dish_name, type_name } = val.dataValues;
@@ -37,9 +36,7 @@ async function typeSentence(locationId, date, type) {
       nagerecht: ''
     }
   );
-  const sentence = `${menuSentence.voorgerecht}${menuSentence.nagerecht}. `;
-  console.log('in noType', sentence);
-  return sentence;
+  return `<speak><s>${menuSentence.voorgerecht}</s><s>${menuSentence.nagerecht}</s></speak>`;
 }
 
 module.exports = typeSentence;

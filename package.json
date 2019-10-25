@@ -21,7 +21,6 @@
     "moment": "^2.24.0",
     "nodemon": "^1.19.4",
     "pg": "^7.11.0",
-    "react-router": "^5.1.2",
     "sequelize": "^5.8.11",
     "supertest": "^4.0.2"
   },

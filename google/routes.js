@@ -11,15 +11,15 @@ const hoofdgerechtSentence = require('./googleFunctions/hoofdgerechtSentence')
 
 const router = new Router();
 const app = dialogflow(
-  //{ debug: true }
+  // { debug: true }
 );
 
 app.intent('fetch_menu', async (conv) => {
+  conv.user.storage.parameters = conv.body.queryResult.parameters;
   conv.data.requestedPermission = 'DEVICE_PRECISE_LOCATION'
   if (conv.user.storage.location) {
     await readMenu(conv)
   } else {
-    conv.user.storage.parameters = conv.body.queryResult.parameters;
     return conv.ask(new Permission({
       context: 'om de juiste keuken van Vitalis te raadplegen',
       permissions: conv.data.requestedPermission
@@ -43,11 +43,8 @@ app.intent('user_info', async (conv, params, permissionGranted) => {
 
 app.intent('delete_location', (conv) => {
   delete conv.user.storage.location
-  conv.close('Oké, ik vraag straks opnieuw de locatie op')
-})
-
-app.intent('close_conversation', (conv) => {
-  conv.close('Tot ziens')
+  conv.close('Oké, ik zal de volgende keer ' +
+    'de locatie opnieuw opvragen')
 })
 
 app.fallback((conv) => {
@@ -74,7 +71,7 @@ readMenu = async (conv) => {
   })
 
   if (!menuExists) {
-    return conv.ask(`Het menu voor die dag bij ${name}` +
+    return conv.ask(`Het menu voor die dag bij ${name} ` +
       'is onbekend. Probeer een andere dag')
   }
 

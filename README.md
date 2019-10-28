@@ -25,6 +25,7 @@ Through Dialogflow, a user can:
 2) Install the server and run it
     ```
     $ git clone
+    $ git cd ./lisa-server
     $ git checkout development
     $ npm install
     $ node .

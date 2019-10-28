@@ -47,10 +47,6 @@ app.intent('delete_location', (conv) => {
     'de locatie opnieuw opvragen')
 })
 
-app.fallback((conv) => {
-  conv.ask('Ik heb geen antwoord op deze vraag')
-})
-
 app.catch((conv, error) => {
   console.error(error)
   conv.close('Er ging iets mis. ' +

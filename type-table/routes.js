@@ -36,7 +36,7 @@ router.delete('/types/:id', (req, res, next) => {
 })
 
 // create new type
-router.post('/types', function (req, res, next) {
+router.post('/location/:locationId/types', function (req, res, next) {
   console.log('REQ', req.body)
   const type = {
     name: req.body.type.name,
@@ -55,6 +55,7 @@ router.post('/types', function (req, res, next) {
 
 //get all types
 router.get("/types", function (req, res, next) {
+
   Dishtype.findAll()
     .then(types => {
       res.json(types);
@@ -64,6 +65,7 @@ router.get("/types", function (req, res, next) {
 
 //gets a type by id
 router.get("/types/:id", function (req, res, next) {
+
   const id = req.params.id;
   Dishtype.findByPk(id)
     .then(type => {

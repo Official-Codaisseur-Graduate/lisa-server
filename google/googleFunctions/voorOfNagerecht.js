@@ -2,48 +2,41 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 const Menu = require('../../menu-table/model');
-const sendError = require('../googleResponses/error')
 
-async function typeSentence(date, type) {
-  console.log('type', type);
-  try {
-    const menu = await Menu.findAll({
-      where: {
-        date,
-        type_name: { [Op.iLike]: `${type}%` }
-      }
-    });
-    console.log('--menu--', menu);
-    const menuSentence = menu.reduce(
-      (acc, val) => {
-        const { dish_name, type_name } = val.dataValues;
+async function typeSentence(locationId, date, type) {
+  const menu = await Menu.findAll({
+    where: {
+      date,
+      type_name: { [Op.iLike]: `${type}%` },
+      locationId
+    }
+  });
 
-        if (type_name.split(' ')[0] === 'Voorgerecht') {
-          if (acc.voorgerecht.length < 1) {
-            acc.voorgerecht = `Het voorgerecht is ${dish_name}`;
-          } else {
-            acc.voorgerecht += ` of ${dish_name}`;
-          }
-        } else if (type_name.split(' ')[0] === 'Nagerecht') {
-          if (acc.nagerecht.length < 1) {
-            acc.nagerecht = `Het nagerecht is ${dish_name}`;
-          } else {
-            acc.nagerecht += ` of ${dish_name}`;
-          }
+  const menuSentence = menu.reduce(
+    (acc, val) => {
+      const { dish_name, type_name } = val.dataValues;
+
+      if (type_name.split(' ')[0] === 'Voorgerecht') {
+        if (acc.voorgerecht.length < 1) {
+          acc.voorgerecht = `Het voorgerecht is ${dish_name}`;
+        } else {
+          acc.voorgerecht += ` of ${dish_name}`;
         }
-        return acc;
-      },
-      {
-        voorgerecht: '',
-        nagerecht: ''
+      } else if (type_name.split(' ')[0] === 'Nagerecht') {
+        if (acc.nagerecht.length < 1) {
+          acc.nagerecht = `Het nagerecht is ${dish_name}`;
+        } else {
+          acc.nagerecht += ` of ${dish_name}`;
+        }
       }
-    );
-    const sentence = `${menuSentence.voorgerecht}${menuSentence.nagerecht}. `;
-    console.log('in noType', sentence);
-    return sentence;
-  } catch (error) {
-    return res.send(sendError())
-  }
+      return acc;
+    },
+    {
+      voorgerecht: '',
+      nagerecht: ''
+    }
+  );
+  return `<speak><s>${menuSentence.voorgerecht}</s><s>${menuSentence.nagerecht}</s></speak>`;
 }
 
 module.exports = typeSentence;

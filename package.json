@@ -15,10 +15,11 @@
     "cors": "^2.8.5",
     "current-week-number": "^1.0.7",
     "express": "^4.17.1",
+    "geolib": "^3.0.4",
     "jest": "^24.8.0",
     "kill-port": "^1.6.0",
     "moment": "^2.24.0",
-    "nodemon": "^1.19.3",
+    "nodemon": "^1.19.4",
     "pg": "^7.11.0",
     "sequelize": "^5.8.11",
     "supertest": "^4.0.2"

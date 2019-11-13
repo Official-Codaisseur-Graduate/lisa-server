@@ -1,6 +1,6 @@
 const Type = require('./type-table/model')
 
-const createSampleData = () => {
+const createDishTypes = () => {
   Type.findOrCreate({ where: { name: 'Voorgerecht 1' }, defaults: {} })
   Type.findOrCreate({ where: { name: 'Voorgerecht 2' }, defaults: {} })
   Type.findOrCreate({ where: { name: 'Hoofdgerecht 1' }, defaults: {} })
@@ -14,4 +14,4 @@ const createSampleData = () => {
 
 }
 
-module.exports = createSampleData
+module.exports = createDishTypes

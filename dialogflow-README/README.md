@@ -1,13 +1,5 @@
-### Lisa login
-To edit LISA, you will need to log in with her Google account [here](https://dialogflow.cloud.google.com/#/agent/e4ee0583-d68d-4127-a8bd-49f3522ded28/intents).
+## PLEASE READ [INITIAL SETUP](https://github.com/Official-Codaisseur-Graduate/lisa-client/blob/master/InitialSetup.md) FIRST
 
-Google ID: lisa.vitalis.assistant@gmail.com
-For the password, please contact Rein.
-
-To connect LISA to your database, add <your server URL>/google-menus as a webhook in the fulfillment tab.
-
-# Dialogflow
-  
 ## What is Dialogflow?
 Dialogflow (formerly Api.ai) is a Google-owned developer of human–computer interaction technologies based on natural language conversations. You can develop a virtual buddy for Android, iOS, and Windows Phone smartphones that performs tasks and answers users’ questions in a natural language. It also created a natural language processing engine that incorporates conversation context like dialogue history, location and user preferences.
 

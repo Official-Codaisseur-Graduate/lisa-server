@@ -1,8 +1,9 @@
-const Sequelize = require('sequelize')
-const { sequelize } = require('../db')
-const Type = require('../type-table/model')
+const Sequelize = require("sequelize");
+const { sequelize } = require("../db");
+const Type = require("../type-table/model");
 
-const Dish = sequelize.define('dishes',
+const Dish = sequelize.define(
+  "dishes",
   {
     name: {
       type: Sequelize.STRING,
@@ -11,9 +12,11 @@ const Dish = sequelize.define('dishes',
   },
   {
     timestamps: false,
-    tableName: 'dishes'
-  })
+    tableName: "dishes"
+  }
+);
 
-Dish.belongsTo(Type)
+Dish.belongsTo(Type);
+Type.hasMany(Dish);
 
-module.exports = Dish
+module.exports = Dish;

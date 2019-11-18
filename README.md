@@ -85,6 +85,7 @@ Here is how you might add a dish for a date with a POST request. In your request
 No limit on number of requests
 
 ## Suggestions
+- If the product owner agrees with it, you can add authentication which connects a user with the location(s) where they work, so they don't have to see the drop down list in the client for all the other locations. 
  - Routing for editing dishes
  - If a user doesn't want to share his/her location, add a feature that the Voice Assistant asks for the name of the retirement home, to go from there.
  - Some locations have the same zipcode and therefore coordinates. 

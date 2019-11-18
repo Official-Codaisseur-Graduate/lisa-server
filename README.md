@@ -1,5 +1,22 @@
-## Introduction
-This is an API for Vitalis Menu editor. This server is also a connection to the google API and DialogFLow.
+# Introduction
+This repository is the version control system of the back-end version of the LISA Voice Assistant Project.
+
+## Contents of this ReadMe-file
+- Introduction
+- Repositories in the LISA-project
+- Overview
+- Installation Guide
+- Authentication
+- Routes
+- Rate limit
+- Suggestions for the next group to work on this project (keep up-to-date!)
+
+## Repositories in the LISA-project
+Read the Docs for set-up and the latest status of the code - make sure to be in the correct branch (development or any open branches that hasn't been merged into development yet). Only merge into the master branch if all the code in development is working and you've checked with Rein, because the master branch is already in production.<br>
+<br>
+- LISA-server - you are here!
+- [LISA-client](https://github.com/Official-Codaisseur-Graduate/lisa-client)
+- [LISA Dialogflow](https://github.com/Official-Codaisseur-Graduate/lisa-client-dialogflow/)
 
 ## Overview
 With this API, a user can:
@@ -66,3 +83,12 @@ Here is how you might add a dish for a date with a POST request. In your request
 
 ## Rate limit
 No limit on number of requests
+
+## Suggestions
+ - Routing for editing dishes
+ - If a user doesn't want to share his/her location, add a feature that the Voice Assistant asks for the name of the retirement home, to go from there.
+ - Some locations have the same zipcode and therefore coordinates. 
+   - It might be trouble if two locations are found based on the location finder. Test what will happen if two locations are found.
+   - The location with the same zip code, have the same menu, because they share the same kitchen (according to @Pittvandewitt who talked to the product owner of this project). Maybe you can think of something more efficient, because now you have to create a menu for all the locations even when they share a kitchen.
+- Test if you could ask for a menu on a specific date (not "tomorrow" but "the fifth of December", "next week", etc.)
+- Test everything thoroughly to make sure everything works.

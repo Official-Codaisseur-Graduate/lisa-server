@@ -1,4 +1,5 @@
 const Menu = require("../../menu-table/model");
+const hooftgerechtSentence = require("./hoofdgerechtSentence");
 
 async function noTypeSentence(locationId, date) {
   const menu = await Menu.findAll({
@@ -7,6 +8,7 @@ async function noTypeSentence(locationId, date) {
       locationId
     }
   });
+
   const menuSentence = menu.reduce(
     (acc, val) => {
       const { dish_name, type_name } = val.dataValues;
@@ -21,17 +23,19 @@ async function noTypeSentence(locationId, date) {
           );
           acc.voorgerecht += ` <break time="150ms" />of ${dish_name}. `;
         }
-      } else if (type_name.split(" ")[0] === "Hoofdgerecht") {
-        if (acc.hoofdgerecht.length < 1) {
-          acc.hoofdgerecht = `Het hoofdgerecht is ${dish_name}.`;
-        } else {
-          acc.hoofdgerecht = acc.hoofdgerecht.substring(
-            0,
-            acc.hoofdgerecht.length - 1
-          );
-          acc.hoofdgerecht += ` <break time="150ms" />of ${dish_name}. `;
-        }
-      } else if (type_name.split(" ")[0] === "Nagerecht") {
+      }
+      // else if (type_name.split(" ")[0] === "Hoofdgerecht") {
+      //   if (acc.hoofdgerecht.length < 1) {
+      //     acc.hoofdgerecht = `Het hoofdgerecht is ${dish_name}.`;
+      //   } else {
+      //     acc.hoofdgerecht = acc.hoofdgerecht.substring(
+      //       0,
+      //       acc.hoofdgerecht.length - 1
+      //     );
+      //     acc.hoofdgerecht += ` <break time="150ms" />of ${dish_name}. `;
+      //   }
+      // }
+      else if (type_name.split(" ")[0] === "Nagerecht") {
         if (acc.nagerecht.length < 1) {
           acc.nagerecht = `Het nagerecht is ${dish_name}`;
         } else {
@@ -42,14 +46,19 @@ async function noTypeSentence(locationId, date) {
     },
     {
       voorgerecht: "",
-      hoofdgerecht: "",
+      // hoofdgerecht: "",
       nagerecht: ""
     }
   );
+
+  const mainDish = await hooftgerechtSentence(locationId, date);
+  console.log("main dish test", mainDish);
+
   return (
     "<speak>" +
     `<s>${menuSentence.voorgerecht}</s>` +
-    `<s>${menuSentence.hoofdgerecht}</s>` +
+    `<s>${mainDish}</s>` +
+    // `<s>${menuSentence.hoofdgerecht}</s>` +
     `<s>${menuSentence.nagerecht}</s>` +
     "</speak>"
   );

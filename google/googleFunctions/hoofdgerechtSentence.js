@@ -8,6 +8,13 @@ async function hoofdgerechtSentence(locationId, date) {
     }
   });
 
+  if (
+    menu.type_name !== "Hoofdgerecht 1" ||
+    menu.type_name !== "Hoofdgerecht 2"
+  ) {
+    return "Geen hoofdgerecht voor deze datum.";
+  }
+
   const hoofdgerecht = menu.reduce(
     (acc, val) => {
       const { dish_name, type_name } = val.dataValues;

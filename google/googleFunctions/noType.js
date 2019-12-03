@@ -1,5 +1,4 @@
 const Menu = require("../../menu-table/model");
-const hoofdgerechtSentence = require("../googleFunctions/hoofdgerechtSentence");
 
 async function noTypeSentence(locationId, date) {
   const menu = await Menu.findAll({

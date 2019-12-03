@@ -9,11 +9,11 @@ async function hoofdgerechtSentence(locationId, date) {
   });
 
   if (
-    menu.type_name !== "Hoofdgerecht 1" ||
-    menu.type_name !== "Hoofdgerecht 2"
+    !menu.some(item => item.dataValues.type_name === "Hoofdgerecht 1") &&
+    !menu.some(item => item.dataValues.type_name === "Hoofdgerecht 2")
   ) {
     return "Geen hoofdgerecht voor deze datum.";
-  }
+  } // this conditional statement sees whether there the Hoofdgerecht 1 & 2 rows are filled, if not, there is no Hoofdgerecht
 
   const hoofdgerecht = menu.reduce(
     (acc, val) => {

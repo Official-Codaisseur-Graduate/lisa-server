@@ -1,4 +1,4 @@
-const Menu = require('../../menu-table/model');
+const Menu = require("../../menu-table/model");
 
 async function hoofdgerechtSentence(locationId, date) {
   const menu = await Menu.findAll({
@@ -12,47 +12,47 @@ async function hoofdgerechtSentence(locationId, date) {
     (acc, val) => {
       const { dish_name, type_name } = val.dataValues;
 
-      if (type_name === 'Hoofdgerecht 1') {
+      if (type_name === "Hoofdgerecht 1") {
         acc.hoofdgerecht1 = `${dish_name} `;
         return acc;
       }
-      if (type_name === 'Saus 1') {
-        acc.saus1 = `${dish_name} `;
+      if (type_name === "Saus 1") {
+        acc.saus1 = `met ${dish_name} `;
         return acc;
       }
-      if (type_name === 'Bijgerecht 1') {
-        if (!acc.bijgerechten1.length) {
+      if (type_name === "Bijgerecht 1") {
+        if (!acc.saus1.length) {
           acc.bijgerechten1 = `met ${dish_name}`;
         } else {
-          acc.bijgerechten1 += ` en ${dish_name}`;
+          acc.bijgerechten1 += `en ${dish_name}`;
         }
         return acc;
       }
-      if (type_name === 'Hoofdgerecht 2') {
+      if (type_name === "Hoofdgerecht 2") {
         acc.hoofdgerecht2 = `${dish_name} `;
         return acc;
       }
-      if (type_name === 'Saus 2') {
-        acc.saus2 = `${dish_name} `;
+      if (type_name === "Saus 2") {
+        acc.saus2 = `met ${dish_name} `;
         return acc;
       }
-      if (type_name === 'Bijgerecht 2') {
-        if (!acc.bijgerechten2.length) {
+      if (type_name === "Bijgerecht 2") {
+        if (!acc.saus2.length) {
           acc.bijgerechten2 = `met ${dish_name}`;
         } else {
-          acc.bijgerechten2 += ` en ${dish_name}`;
+          acc.bijgerechten2 += `en ${dish_name}`;
         }
         return acc;
       }
       return acc;
     },
     {
-      hoofdgerecht1: '',
-      saus1: '',
-      bijgerechten1: '',
-      hoofdgerecht2: '',
-      saus2: '',
-      bijgerechten2: ''
+      hoofdgerecht1: "",
+      saus1: "",
+      bijgerechten1: "",
+      hoofdgerecht2: "",
+      saus2: "",
+      bijgerechten2: ""
     }
   );
   const {
@@ -63,9 +63,11 @@ async function hoofdgerechtSentence(locationId, date) {
     bijgerechten1,
     bijgerechten2
   } = hoofdgerecht;
-  return '<speak><s>De eerste optie voor het hoofdgerecht is ' +
-    `${hoofdgerecht1}${saus1}${bijgerechten1}.</s>` +
+  return (
+    "<speak><s>De eerste optie voor het hoofdgerecht is " +
+    `${hoofdgerecht1} ${saus1} ${bijgerechten1}.</s>` +
     ` <s>De tweede optie is ${hoofdgerecht2}${saus2}${bijgerechten2}</s></speak>`
+  );
 }
 
 module.exports = hoofdgerechtSentence;

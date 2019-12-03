@@ -1,4 +1,5 @@
-const Menu = require('../../menu-table/model');
+const Menu = require("../../menu-table/model");
+const hoofdgerechtSentence = require("../googleFunctions/hoofdgerechtSentence");
 
 async function noTypeSentence(locationId, date) {
   const menu = await Menu.findAll({
@@ -11,23 +12,29 @@ async function noTypeSentence(locationId, date) {
     (acc, val) => {
       const { dish_name, type_name } = val.dataValues;
 
-      if (type_name.split(' ')[0] === 'Voorgerecht') {
+      if (type_name.split(" ")[0] === "Voorgerecht") {
         if (acc.voorgerecht.length < 1) {
           acc.voorgerecht = `Het voorgerecht is ${dish_name}.`;
         } else {
-          acc.voorgerecht = acc.voorgerecht.substring(0, acc.voorgerecht.length -1)
+          acc.voorgerecht = acc.voorgerecht.substring(
+            0,
+            acc.voorgerecht.length - 1
+          );
           acc.voorgerecht += ` <break time="150ms" />of ${dish_name}. `;
         }
-      } else if (type_name.split(' ')[0] === 'Hoofdgerecht') {
+      } else if (type_name.split(" ")[0] === "Hoofdgerecht") {
         if (acc.hoofdgerecht.length < 1) {
-          acc.hoofdgerecht = `Het hoofdgerecht ${dish_name}.`;
+          acc.hoofdgerecht = `Het hoofdgerecht is ${dish_name}.`;
         } else {
-          acc.hoofdgerecht = acc.hoofdgerecht.substring(0, acc.hoofdgerecht.length -1)
+          acc.hoofdgerecht = acc.hoofdgerecht.substring(
+            0,
+            acc.hoofdgerecht.length - 1
+          );
           acc.hoofdgerecht += ` <break time="150ms" />of ${dish_name}. `;
         }
-      } else if (type_name.split(' ')[0] === 'Nagerecht') {
+      } else if (type_name.split(" ")[0] === "Nagerecht") {
         if (acc.nagerecht.length < 1) {
-          acc.nagerecht = `Het nagerecht ${dish_name}`;
+          acc.nagerecht = `Het nagerecht is ${dish_name}`;
         } else {
           acc.nagerecht += ` <break time="150ms" />of ${dish_name}`;
         }
@@ -35,16 +42,18 @@ async function noTypeSentence(locationId, date) {
       return acc;
     },
     {
-      voorgerecht: '',
-      hoofdgerecht: '',
-      nagerecht: ''
+      voorgerecht: "",
+      hoofdgerecht: "",
+      nagerecht: ""
     }
   );
-  return '<speak>' +
-    `<s>${menuSentence.voorgerecht}</s>` + 
+  return (
+    "<speak>" +
+    `<s>${menuSentence.voorgerecht}</s>` +
     `<s>${menuSentence.hoofdgerecht}</s>` +
     `<s>${menuSentence.nagerecht}</s>` +
-    '</speak>';
+    "</speak>"
+  );
 }
 
 module.exports = noTypeSentence;

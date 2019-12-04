@@ -26,7 +26,7 @@ async function nagerechtSentence(locationId, date) {
         if (acc.nagerecht.length < 1) {
           acc.nagerecht = `Het nagerecht is ${dish_name}`;
         } else {
-          acc.nagerecht += ` of ${dish_name}`;
+          acc.nagerecht += ` of ${dish_name}.`;
         }
       }
       return acc;

@@ -29,9 +29,9 @@ async function hoofdgerechtSentence(locationId, date) {
       }
       if (type_name === "Bijgerecht 1") {
         if (!acc.saus1.length) {
-          acc.bijgerechten1 = `met ${dish_name}`;
+          acc.bijgerechten1 = `met ${dish_name}.`;
         } else {
-          acc.bijgerechten1 += `en ${dish_name}`;
+          acc.bijgerechten1 += `en ${dish_name}.`;
         }
         return acc;
       }
@@ -45,9 +45,9 @@ async function hoofdgerechtSentence(locationId, date) {
       }
       if (type_name === "Bijgerecht 2") {
         if (!acc.saus2.length) {
-          acc.bijgerechten2 = `met ${dish_name}`;
+          acc.bijgerechten2 = `met ${dish_name}.`;
         } else {
-          acc.bijgerechten2 += `en ${dish_name}`;
+          acc.bijgerechten2 += `en ${dish_name}.`;
         }
         return acc;
       }

@@ -35,6 +35,7 @@ async function nagerechtSentence(locationId, date) {
       nagerecht: ""
     }
   );
+
   return `<speak><s>${menuSentence.nagerecht}.</s></speak>`;
 }
 

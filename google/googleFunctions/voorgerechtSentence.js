@@ -35,6 +35,7 @@ async function voorgerechtSentence(locationId, date) {
       voorgerecht: ""
     }
   );
+
   return `<speak><s>${menuSentence.voorgerecht}.</s></speak>`;
 }
 

@@ -26,7 +26,7 @@ async function voorgerechtSentence(locationId, date) {
         if (acc.voorgerecht.length < 1) {
           acc.voorgerecht = `Het voorgerecht is ${dish_name}`;
         } else {
-          acc.voorgerecht += ` of ${dish_name}.`;
+          acc.voorgerecht += ` of ${dish_name}`;
         }
       }
       return acc;
@@ -35,7 +35,7 @@ async function voorgerechtSentence(locationId, date) {
       voorgerecht: ""
     }
   );
-  return `<speak><s>${menuSentence.voorgerecht}</s></speak>`;
+  return `<speak><s>${menuSentence.voorgerecht}.</s></speak>`;
 }
 
 module.exports = voorgerechtSentence;

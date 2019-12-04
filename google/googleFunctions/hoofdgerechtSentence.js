@@ -8,6 +8,13 @@ async function hoofdgerechtSentence(locationId, date) {
     }
   });
 
+  if (
+    !menu.some(item => item.dataValues.type_name === "Hoofdgerecht 1") &&
+    !menu.some(item => item.dataValues.type_name === "Hoofdgerecht 2")
+  ) {
+    return "Geen hoofdgerecht voor deze datum.";
+  } // this conditional statement sees whether there the Hoofdgerecht 1 & 2 rows are filled, if not, there is no Hoofdgerecht
+
   const hoofdgerecht = menu.reduce(
     (acc, val) => {
       const { dish_name, type_name } = val.dataValues;
@@ -22,9 +29,9 @@ async function hoofdgerechtSentence(locationId, date) {
       }
       if (type_name === "Bijgerecht 1") {
         if (!acc.saus1.length) {
-          acc.bijgerechten1 = `met ${dish_name}`;
+          acc.bijgerechten1 = `met ${dish_name}.`;
         } else {
-          acc.bijgerechten1 += `en ${dish_name}`;
+          acc.bijgerechten1 += `en ${dish_name}.`;
         }
         return acc;
       }
@@ -38,9 +45,9 @@ async function hoofdgerechtSentence(locationId, date) {
       }
       if (type_name === "Bijgerecht 2") {
         if (!acc.saus2.length) {
-          acc.bijgerechten2 = `met ${dish_name}`;
+          acc.bijgerechten2 = `met ${dish_name}.`;
         } else {
-          acc.bijgerechten2 += `en ${dish_name}`;
+          acc.bijgerechten2 += `en ${dish_name}.`;
         }
         return acc;
       }

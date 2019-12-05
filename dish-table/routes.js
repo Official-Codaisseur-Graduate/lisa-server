@@ -5,7 +5,7 @@ const Type = require("../type-table/model");
 const router = new Router();
 
 // adds a menu dish
-router.post("/location/:locationId/dishes", function(req, res, next) {
+router.post("/location/:locationId/createDish", function(req, res, next) {
   const { dishName, typeId } = req.body.dish;
 
   const dish = {

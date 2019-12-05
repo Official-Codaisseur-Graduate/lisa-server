@@ -1,6 +1,6 @@
 //use this file to bulc create dishes only
 //right now dish belongs to location and dishtype - that determines promise chain in this file
-
+//7792fa897fe0fcd82eb6955ce588d00c438aa7a090506e5f28b3857d9268a9b4
 const db = require("./db");
 
 const Dishtype = require("./type-table/model");

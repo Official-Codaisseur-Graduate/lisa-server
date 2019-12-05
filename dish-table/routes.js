@@ -5,13 +5,13 @@ const Type = require("../type-table/model");
 const router = new Router();
 
 // adds a menu dish
-router.post("/location/:locationId/createDish", function(req, res, next) {
-  const { dishName, typeId } = req.body.dish;
+router.post("/createDish", function(req, res, next) {
+  const { dishName, typeId, currentLocation } = req.body.dish;
 
   const dish = {
     name: dishName,
     typeId,
-    locationId: req.params.locationId
+    locationId: currentLocation
   };
 
   Dish.create(dish)
@@ -27,20 +27,6 @@ router.post("/location/:locationId/createDish", function(req, res, next) {
       }
     })
     .catch(err => next(err));
-});
-
-//update dish
-router.put("/dishes/:id", (req, res, next) => {
-  Dish.findByPk(req.params.id)
-    .then(dish => {
-      if (!dish) {
-        return res.status(404).send({
-          message: `Dish does not exist`
-        });
-      }
-      return dish.update(req.body).then(dish => res.send(dish));
-    })
-    .catch(error => next(error));
 });
 
 //delele dish
@@ -61,7 +47,7 @@ router.delete("/dishes/:id", (req, res, next) => {
     .catch(error => next(error));
 });
 
-// get a menu dish by id
+// get a menu dish by id NOT USED IN THE APP RIHGT NOW
 router.get("/location/:locationId/dishes/:id", function(req, res, next) {
   const id = req.params.id;
   Dish.findByPk(id, {
@@ -78,7 +64,7 @@ router.get("/location/:locationId/dishes/:id", function(req, res, next) {
     .catch(err => next(err));
 });
 
-// get a menu dish by type
+// get a menu dish by type NOT USED
 router.get("/location/:locationId/dishes", function(req, res, next) {
   Dish.findAll({
     where: {
@@ -92,6 +78,19 @@ router.get("/location/:locationId/dishes", function(req, res, next) {
       res.json(dishes);
     })
     .catch(err => next(err));
+});
+//update dish NOT USED
+router.put("/dishes/:id", (req, res, next) => {
+  Dish.findByPk(req.params.id)
+    .then(dish => {
+      if (!dish) {
+        return res.status(404).send({
+          message: `Dish does not exist`
+        });
+      }
+      return dish.update(req.body).then(dish => res.send(dish));
+    })
+    .catch(error => next(error));
 });
 
 module.exports = router;

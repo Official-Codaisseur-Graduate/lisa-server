@@ -6,8 +6,8 @@ const currentWeekNumber = require("current-week-number");
 //get menus by date
 router.get("/location/:locationId/menus", (req, res) => {
   const { date } = req.query;
-  console.log("getting menu");
-  console.log("req.query", req.query);
+  //console.log("getting menu");
+  //console.log("req.query", req.query);
   Menu.findAll({
     where: {
       locationId: req.params.locationId,
@@ -21,7 +21,7 @@ router.get("/location/:locationId/menus", (req, res) => {
 });
 
 router.post("/location/:locationId/menus", (req, res) => {
-  console.log("Check what is in the create menu 2", req.body.dish);
+  //console.log("Check what is in the create menu 2", req.body.dish);
 
   const dish = {
     type_name: req.body.dish.type_name,
@@ -29,14 +29,14 @@ router.post("/location/:locationId/menus", (req, res) => {
     date: req.body.dish.date,
     locationId: req.params.locationId
   };
-  console.log("dish", dish);
+  //console.log("dish", dish);
   const week = currentWeekNumber(dish.date);
   Menu.create({ ...dish, week: week })
     .then(menu => res.status(201).send(menu))
     .catch(console.error);
 });
 
-//delete menu by id
+//delete menu by id NOT USED YET IN THE APPLICATION
 router.delete("/menus/:id", (req, res, next) => {
   const { id } = req.params;
   Menu.findByPk(id)

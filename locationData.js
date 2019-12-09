@@ -1,7 +1,5 @@
 const Location = require('./location-table/model')
-
-/**
- * Keep this table in sync with
+/* Keep this table in sync with
  * https://www.vitalisgroep.nl/vitalis-woonzorg-groep/vitalis/onze-locaties
  */
 

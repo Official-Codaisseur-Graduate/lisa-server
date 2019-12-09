@@ -15,7 +15,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 require("./modelRelations");
-//require("./seeds");
+require("./dishesData");
 
 dbSync().then(() => {
   console.log("Connected to database");

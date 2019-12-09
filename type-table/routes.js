@@ -26,7 +26,7 @@ router.get("/types/:id", function (req, res, next) {
     .catch(err => next(err))
 })
 
-//update a dish type NOT USED
+//update a dish type NOT USED YET IN THE APPLICATION
 router.put('/types/:id', (req, res, next) => {
   Dishtype
     .findByPk(req.params.id)
@@ -41,7 +41,7 @@ router.put('/types/:id', (req, res, next) => {
     .catch(error => next(error))
 })
 
-//delele a dish type NOT USED
+//delele a dish type NOT USED YET IN THE APPLICATION
 router.delete('/types/:id', (req, res, next) => {
   Dishtype
     .findByPk(req.params.id)
@@ -59,9 +59,9 @@ router.delete('/types/:id', (req, res, next) => {
     .catch(error => next(error))
 })
 
-// create new type NOT USED 
+// create new type NOT USED YET IN THE APPLICATION
 router.post('/location/:locationId/types', function (req, res, next) {
-  console.log('REQ', req.body)
+  //console.log('REQ', req.body)
   const type = {
     name: req.body.type.name,
   };

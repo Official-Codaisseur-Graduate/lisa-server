@@ -15,8 +15,8 @@ Dishtype.hasMany(Dish);
 
 /* realtions as they probably would make more sense:
 
-Location.hasMany(Menu);
-Menu.belongsTo(Location);
+Location.hasMany(Menu); - for different dates
+Menu.belongsTo(Location); - 
 
 Menu.hasMany(Dish);
 Dish.belongsTo(Menu);

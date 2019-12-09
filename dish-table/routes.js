@@ -56,7 +56,7 @@ router.get("/location/:locationId/dishes/:id", function(req, res, next) {
     .then(dish => {
       if (!dish) {
         return res.status(404).send({
-          message: `Event does not exit`
+          message: `Dish does not exit`
         });
       }
       return res.send(dish);
@@ -64,7 +64,7 @@ router.get("/location/:locationId/dishes/:id", function(req, res, next) {
     .catch(err => next(err));
 });
 
-// get a menu dish by type NOT USED
+// get a menu dish by type NOT USED IN THE APP RIHGT NOW
 router.get("/location/:locationId/dishes", function(req, res, next) {
   Dish.findAll({
     where: {
@@ -74,12 +74,12 @@ router.get("/location/:locationId/dishes", function(req, res, next) {
     }
   })
     .then(dishes => {
-      console.log(dishes);
+      //console.log(dishes);
       res.json(dishes);
     })
     .catch(err => next(err));
 });
-//update dish NOT USED
+//update dish NOT USED IN THE APP RIHGT NOW
 router.put("/dishes/:id", (req, res, next) => {
   Dish.findByPk(req.params.id)
     .then(dish => {

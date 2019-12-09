@@ -61,7 +61,7 @@ router.delete('/types/:id', (req, res, next) => {
 
 // create new type NOT USED YET IN THE APPLICATION
 router.post('/location/:locationId/types', function (req, res, next) {
-  console.log('REQ', req.body)
+  //console.log('REQ', req.body)
   const type = {
     name: req.body.type.name,
   };

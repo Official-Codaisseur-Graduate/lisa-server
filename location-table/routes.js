@@ -37,8 +37,7 @@ router.delete('/locations/:id', (req, res, next) => {
 
 // create new location
 router.post('/locations', function (req, res, next) {
-  console.log('REQ', req.body)
-  const location = {
+    const location = {
     name: req.body.location.name,
   };
   Location.create(location)

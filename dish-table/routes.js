@@ -74,7 +74,7 @@ router.get("/location/:locationId/dishes", function(req, res, next) {
     }
   })
     .then(dishes => {
-      console.log(dishes);
+      //console.log(dishes);
       res.json(dishes);
     })
     .catch(err => next(err));

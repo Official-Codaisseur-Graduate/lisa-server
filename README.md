@@ -1,7 +1,7 @@
 ## Contents of this README file:
 
 - Introduction
-- Repositories in the LISA-project
+- All repositories in the LISA-project
 - Features Overview
 - Installation
 - Authentication
@@ -10,13 +10,13 @@
 
 # Introduction
 
-This repository is the version control system of the backend version of the LISA Voice Assistant Project.
-**Rein Op 't Land** is the PO (PO) of this project.
+This repository is the version control system of the backend version of the LISA Voice Assistant Project developed for the Vitalis Woonzorg Group.
+This project uses Express server, Sequelize ORM, geo-library and actions-on-google library. 
+**Rein Op 't Land** is the Product Owner (PO) of this project.
 
 ## Repositories in the LISA-project
 
-Read the Docs for set-up and the latest status of the code - make sure to be in the correct branch (development or any open branches that hasn't been merged into development yet). Only merge into the master branch if all the code in development is working and you've checked with PO, because the master branch is already in POr>
-<br>
+Read the Docs for set-up and the latest status of the code. Make sure to write code in the correct branch (development or any open branches that hasn't been merged into development yet). Only merge into the master branch if all the code in development works and you've checked with the PO.
 
 - LISA-server - you are here!
 - [LISA-client](https://github.com/Official-Codaisseur-Graduate/lisa-client)

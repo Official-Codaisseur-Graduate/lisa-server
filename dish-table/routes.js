@@ -56,7 +56,7 @@ router.get("/location/:locationId/dishes/:id", function(req, res, next) {
     .then(dish => {
       if (!dish) {
         return res.status(404).send({
-          message: `Event does not exit`
+          message: `Dish does not exit`
         });
       }
       return res.send(dish);

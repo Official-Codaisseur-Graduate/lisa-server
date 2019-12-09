@@ -11,7 +11,7 @@
 # Introduction
 
 This repository is the version control system of the backend version of the LISA Voice Assistant Project developed for the Vitalis Woonzorg Group.
-This project uses Express server, Sequelize ORM, geo-library and actions-on-google library. 
+This project uses Express server and Sequelize ORM. This server is also a connection to the google API and DialogFLow.
 **Rein Op 't Land** is the Product Owner (PO) of this project.
 
 ## Repositories in the LISA-project
@@ -48,7 +48,7 @@ Through **LISA-client** a user (kitchen chef) can:
    ```
    $ docker run --rm -e POSTGRES_PASSWORD=secret -p 5432:5432 postgres
    ```
-   
+
    To connect to the Database on a Mac you can use [Postico](https://eggerapps.at/postico/), on Linux - [DBeaver](https://dbeaver.io/)
 
 2. Install the LISA-server and run it

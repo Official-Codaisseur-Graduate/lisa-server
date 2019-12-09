@@ -59,6 +59,7 @@ Through **LISA-client** a user (kitchen chef) can:
    $ git checkout development
    $ npm install
    $ node . or nodemon .
+    *DishesData.js* file contains test data (dish types) for location id 6 - you can "comment it in" to insert dishes for testing for location 6.
    ```
 
 3. Set up the front-end. The client and instructions can be found [here](https://github.com/Official-Codaisseur-Graduate/lisa-client).
@@ -86,7 +87,6 @@ No limit on number of requests
 - For a simpler database structure, you might want to remove a distinction between dishTypes 1 and 2.
 
 - If the PO agrees, you can add authentication which connects a user with the location(s) where they work, so they don't have to see the drop down list in the client for all the other locations.
-- _Seeds.js_ file contains test data (dish types) for location id 6 - if you change model relations - this file will need editing.
 
 - You might want to change route paths on the back and front-end to Dutch language version (e.g. "router.post('/createDish'" to "/gerechtMaken".
 

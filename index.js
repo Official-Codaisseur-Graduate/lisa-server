@@ -15,7 +15,8 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 require("./modelRelations");
-require("./dishesData");
+// Dishes data for location 6 - used only for testing. 
+//require("./dishesData");
 
 dbSync().then(() => {
   console.log("Connected to database");

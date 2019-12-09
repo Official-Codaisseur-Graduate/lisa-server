@@ -36,7 +36,7 @@ router.post("/location/:locationId/menus", (req, res) => {
     .catch(console.error);
 });
 
-//delete menu by id
+//delete menu by id NOT USED YET IN THE APPLICATION
 router.delete("/menus/:id", (req, res, next) => {
   const { id } = req.params;
   Menu.findByPk(id)

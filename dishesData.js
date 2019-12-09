@@ -1,12 +1,7 @@
-//use this file to bulc create dishes only
+//use this file to bulk create dishes only
 //right now dish belongs to location and dishtype - that determines promise chain in this file
-//7792fa897fe0fcd82eb6955ce588d00c438aa7a090506e5f28b3857d9268a9b4
 const db = require("./db");
-
-const Dishtype = require("./type-table/model");
 const Dish = require("./dish-table/model");
-const Location = require("./location-table/model");
-const Menu = require("./menu-table/model");
 
 db.dbSync({ force: true })
   .then(() =>

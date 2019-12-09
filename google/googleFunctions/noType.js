@@ -3,6 +3,9 @@ const hoofdgerechtSentence = require("./hoofdgerechtSentence");
 const voorgerechtSentence = require("./voorgerechtSentence");
 const nagerechtSentence = require("./nagerechtSentence");
 
+
+//this function uses three functions for hoofd-, na- and voorgerecht sentences to present the whole menu for a day
+//all three functons are in turn used in case when user asks for a specific dish type from the menu.
 async function noTypeSentence(locationId, date) {
   const menu = await Menu.findAll({
     where: {
@@ -11,61 +14,15 @@ async function noTypeSentence(locationId, date) {
     }
   });
 
-  // const menuSentence = menu.reduce(
-  //   (acc, val) => {
-  //     const { dish_name, type_name } = val.dataValues;
-
-  //     if (type_name.split(" ")[0] === "Voorgerecht") {
-  //       if (acc.voorgerecht.length < 1) {
-  //         acc.voorgerecht = `Het voorgerecht is ${dish_name}.`;
-  //       } else {
-  //         acc.voorgerecht = acc.voorgerecht.substring(
-  //           0,
-  //           acc.voorgerecht.length - 1
-  //         );
-  //         acc.voorgerecht += ` <break time="150ms" />of ${dish_name}. `;
-  //       }
-  //     }
-  //     // else if (type_name.split(" ")[0] === "Hoofdgerecht") {
-  //     //   if (acc.hoofdgerecht.length < 1) {
-  //     //     acc.hoofdgerecht = `Het hoofdgerecht is ${dish_name}.`;
-  //     //   } else {
-  //     //     acc.hoofdgerecht = acc.hoofdgerecht.substring(
-  //     //       0,
-  //     //       acc.hoofdgerecht.length - 1
-  //     //     );
-  //     //     acc.hoofdgerecht += ` <break time="150ms" />of ${dish_name}. `;
-  //     //   }
-  //     // }
-  //     else if (type_name.split(" ")[0] === "Nagerecht") {
-  //       if (acc.nagerecht.length < 1) {
-  //         acc.nagerecht = `Het nagerecht is ${dish_name}`;
-  //       } else {
-  //         acc.nagerecht += ` <break time="150ms" />of ${dish_name}`;
-  //       }
-  //     }
-  //     return acc;
-  //   },
-  //   {
-  //     // voorgerecht: "",
-  //     // hoofdgerecht: "",
-  //     // nagerecht: ""
-  //   }
-  // );
-
   const voorgerecht = await voorgerechtSentence(locationId, date);
   const hoofdgerecht = await hoofdgerechtSentence(locationId, date);
   const nagerecht = await nagerechtSentence(locationId, date);
-  // console.log("main dish test", mainDish);
 
   return (
     "<speak>" +
-    // `<s>${menuSentence.voorgerecht}</s>` +
     `<s>${voorgerecht}</s>` +
     `<s>${hoofdgerecht}</s>` +
     `<s>${nagerecht}</s>` +
-    // `<s>${menuSentence.hoofdgerecht}</s>` +
-    // `<s>${menuSentence.nagerecht}</s>` +
     "</speak>"
   );
 }

@@ -1,12 +1,12 @@
+//this file is used to make the database respond to google assistant's requests.
 const { Router } = require("express");
 const { findNearest } = require("geolib");
-const { dialogflow, Permission } = require("actions-on-google");
+const { dialogflow, Permission } = require("actions-on-google"); 
 
 const Menu = require("../menu-table/model");
 const Location = require("../location-table/model");
 
 const noTypeSentence = require("./googleFunctions/noType");
-// const typeSentence = require('./googleFunctions/nagerechtSentence');
 const hoofdgerechtSentence = require("./googleFunctions/hoofdgerechtSentence");
 const nagerechtSentence = require("./googleFunctions/nagerechtSentence");
 const voorgerechtSentence = require("./googleFunctions/voorgerechtSentence");
